@@ -1,0 +1,53 @@
+body {
+	background-image: url(../style/avantlink-ribbon.svg);
+	height: 100vh;
+	background-position: right;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	font-family: Roboto;
+}
+h5 {
+	font-weight: bolder;
+}
+h6 {
+	font-weight: bold;
+}
+
+#affTable {
+	border-color: blue;
+	border-width: 3px;
+}
+#productsRow {
+	margin-top: 100px;
+}
+#noteInputSection {
+	background-color: rgb(240, 210, 121);
+}
+#report_pdf {
+	background-color: white;
+	@page {
+		size: auto;
+		margin: 25mm 25mm 25mm 25mm;
+	}
+	@media print {
+		#search,
+		.printPage {
+			display: none !important;
+		}
+	}
+}
+.noteBox {
+	position: relative;
+}
+
+.noteBox .close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 5px;
+}
+.image-preview {
+	max-width: 100%;
+	height: auto;
+}
