@@ -22,13 +22,63 @@ function addMerchant() {
 		document.getElementById("selectedMerchantButton").disabled = false;
 	}
 }
-function runSelectedMerchants() {}
+function api_error(error, merchant_id) {
+	if (error.message.includes("Failed to fetch")) {
+		console.error(merchant_id, +" Failed to fetch data:", error);
+		var column = document.createElement("div");
+		column.classList.add("col-12");
 
-var data = {
-	monthlyPerformanceSummary: [],
-	notablePerformers: { one: [], two: [], three: [] },
-	newAffs: {},
-};
+		// Create an <h5> element for the Merchant ID
+		var merchantIdHeader = document.createElement("h5");
+		merchantIdHeader.textContent = "Merchant ID: " + merchant_id;
+		column.appendChild(merchantIdHeader);
+
+		// Create an <h6> element for the error
+		var errorHeader = document.createElement("h6");
+		errorHeader.textContent = "Error: " + error;
+		column.appendChild(errorHeader);
+		console.log(column);
+		insertListing(column, "danger");
+	} else {
+		// Handle other types of errors example below
+		// console.error("An error occurred:", error);
+	}
+}
+function runSelectedMerchants() {
+	var merchantList = [];
+	var listItems = document.querySelectorAll("#merchantList li");
+	listItems.forEach(function (item) {
+		var merchantId = item.textContent.trim().replace("Remove", "");
+		merchantList.push(merchantId);
+	});
+	document
+		.querySelectorAll(".IdRemove")
+		.forEach((item) => item.classList.add("disabled"));
+	console.log(merchantList);
+	loadButton("selectedMerchantButton");
+	var acceptableData = true;
+	today.date = DateToString(new Date());
+	today.year = new Date().getFullYear();
+	today.month = new Date().getMonth();
+	today.day = new Date().getDay();
+	console.log(today);
+	var api_start_date = today.year - 1 + "-" + today.month + "-01";
+	var api_end_date = getLastDayOfPreviousMonth();
+	console.log(api_end_date, api_start_date);
+
+	for (i = 0; i < merchantList.length; i++) {
+		console.log(i);
+		runAPI({
+			report_id: 48,
+			startDate: api_start_date,
+			endDate: api_end_date,
+			merchant_id: merchantList[i],
+		});
+	}
+
+	// API Call switch for FAILURE - Display - SUCCESS - run a graph, and some sort of algorithm to detect a month where drop off occured.
+}
+
 function isNumber(value) {
 	return typeof value === "number" && isFinite(value);
 }
@@ -67,19 +117,66 @@ function hideRow(rowId, btnId) {
 		row.hidden = true;
 	}
 }
+function insertListing(columns, classes) {
+	console.log(columns);
+	console.log(classes);
+	// Create a new <div> element with the class "row"
+	var row = document.createElement("div");
+	row.classList.add("row");
+	switch (classes) {
+		case "danger":
+			row.classList.add("alert", "alert-danger");
+			break;
+		default:
+			break;
+	}
+	for (i = 0; i < columns.length; i++) {
+		console.log(i);
+		row.appendChild(columns[i]);
+	}
+
+	// Get the element with the id "graph_display"
+	var graphDisplay = document.getElementById("graph_display");
+
+	// Append the new <div> element to the "graph_display" element
+	graphDisplay.appendChild(row);
+	graphDisplay.appendChild(document.createElement("br"));
+}
 function removeDisabledButton(id) {
 	let btn = document.getElementById(id);
 	btn.disabled = false;
 	btn.classList = "btn btn-success";
 }
 function loadButton(id) {
-	document.getElementById("first_loading_bar").hidden = false;
+	// document.getElementById("first_loading_bar").hidden = false;
 	let btn = document.getElementById(id);
 	btn.disabled = true;
 	btn.classList = "btn btn-outline.primary";
 	btn.innerHTML = `<div class="spinner-border text-primary" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>`;
+}
+function getLastDayOfPreviousMonth() {
+	// Get the current date
+	const currentDate = new Date();
+	// Set the date to the first day of the current month
+	currentDate.setDate(1);
+	// Set the date to the previous day, which effectively sets it to the last day of the previous month
+	currentDate.setDate(0);
+
+	// Extract year, month, and date components
+	const year = currentDate.getFullYear();
+	// JavaScript months are zero-based, so we add 1 to get the previous month
+	const month = currentDate.getMonth() + 1;
+	const day = currentDate.getDate();
+
+	// Format the date as yyyy-mm-dd
+	const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day
+		.toString()
+		.padStart(2, "0")}`;
+
+	// Return the formatted date
+	return formattedDate;
 }
 function addNote() {
 	let noteTitle = document.getElementById("manualTitleText").value;
@@ -151,6 +248,46 @@ function password_check() {
 			alert("This key is an unacceptable value");
 			break;
 	}
+}
+
+function createRow() {
+	// Create a new <div> element with the class "row"
+	var row = document.createElement("div");
+	row.classList.add("row");
+
+	// Get the element with the id "graph_display"
+	var graphDisplay = document.getElementById("graph_display");
+
+	// Append the new <div> element to the "graph_display" element
+	graphDisplay.appendChild(row);
+}
+
+function identifySignificantDrops(data) {
+	console.log("BUGS");
+	let significantDrops = [];
+	for (let i = 1; i < data.length; i++) {
+		const currentSales = data[i].Sales;
+		const previousSales = data[i - 1].Sales;
+
+		// Calculate the percentage change in sales
+		const percentageChange =
+			((currentSales - previousSales) / previousSales) * 100;
+
+		// Define a threshold for significant drops
+		const threshold = -70; // 70% drop
+
+		// If the percentage change is below the threshold, consider it a significant drop
+		if (percentageChange < threshold) {
+			significantDrops.push({
+				Month: data[i].Month,
+				Sales: data[i].Sales,
+				PreviousMonthSales: previousSales,
+				PercentageChange: percentageChange.toFixed(2) + "%",
+			});
+		}
+	}
+
+	return significantDrops;
 }
 
 // function perfomance_report() {
