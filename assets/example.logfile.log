@@ -1,0 +1,76 @@
+app.js:180 <div class=​"row" id=​"monthlyReport">​…​</div>​flex
+app.js:180 <div id=​"report_display">​…​</div>​
+app.js:6 <input type=​"text" class=​"form-control" id=​"merchantIdInput" placeholder=​"Enter Merchant ID" required>​
+app.js:6 <input type=​"text" class=​"form-control" id=​"merchantIdInput" placeholder=​"Enter Merchant ID" required>​
+app.js:57 (2) ['19369', '21821']
+app.js:64 {date: 'March 11, 2024', year: 2024, month: 2, day: 1}
+app.js:66 0
+API_reports.js:62 Selected Account Type: US
+API_reports.js:14 US
+API_reports.js:24 API DETAILS {report_id: 48, startDate: '2023-2-01', endDate: '2024-2-1', month: 'next', merchant_id: '19369'}
+app.js:66 1
+API_reports.js:62 Selected Account Type: US
+API_reports.js:14 US
+API_reports.js:24 API DETAILS {report_id: 48, startDate: '2023-2-01', endDate: '2024-2-1', month: 'next', merchant_id: '21821'}
+API_reports.js:71 19369  API STEP 2: 48
+API_reports.js:75 #document (file:///C:/Users/mark/AvantLink/github/AvantLink_Merchant_Analytics_report/index.html)
+API_reports.js:174 {monthlyPerformanceSummary: Array(13)}
+graphs.js:4 building GRAPH 19369 (13) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]0: {Month: '2023-Feb', Ad_Impressions: 3373, Click_Throughs: 21356, Sales: 83491.45, Number_of_Sales: 1044, …}1: {Month: '2023-Mar', Ad_Impressions: 2700, Click_Throughs: 22427, Sales: 89785.77, Number_of_Sales: 1063, …}2: {Month: '2023-Apr', Ad_Impressions: 2903, Click_Throughs: 20795, Sales: 103218.59, Number_of_Sales: 1248, …}3: {Month: '2023-May', Ad_Impressions: 2518, Click_Throughs: 28814, Sales: 160838.52, Number_of_Sales: 1737, …}4: {Month: '2023-Jun', Ad_Impressions: 2466, Click_Throughs: 20965, Sales: 101875.02, Number_of_Sales: 1150, …}5: {Month: '2023-Jul', Ad_Impressions: 2717, Click_Throughs: 19987, Sales: 117884.77, Number_of_Sales: 1259, …}6: {Month: '2023-Aug', Ad_Impressions: 2936, Click_Throughs: 18968, Sales: 140889.92, Number_of_Sales: 1605, …}7: {Month: '2023-Sep', Ad_Impressions: 1798, Click_Throughs: 18132, Sales: 113242.71, Number_of_Sales: 1345, …}8: {Month: '2023-Oct', Ad_Impressions: 4267, Click_Throughs: 15710, Sales: 106713.2, Number_of_Sales: 1288, …}9: {Month: '2023-Nov', Ad_Impressions: 1018, Click_Throughs: 22061, Sales: 193439, Number_of_Sales: 1989, …}10: {Month: '2023-Dec', Ad_Impressions: 2389, Click_Throughs: 20220, Sales: 120685.51, Number_of_Sales: 1422, …}11: {Month: '2024-Jan', Ad_Impressions: 2353, Click_Throughs: 21632, Sales: 36937.77, Number_of_Sales: 478, …}12: {Month: '2024-Feb', Ad_Impressions: 216, Click_Throughs: 530, Sales: 0, Number_of_Sales: 0, …}length: 13[[Prototype]]: Array(0)
+jsapi_compiled_default_module.js:157 [Violation] Added non-passive event listener to a scroll-blocking 'mousewheel' event. Consider marking event handler as 'passive' to make the page more responsive. See https://www.chromestatus.com/feature/5745543795965952
+gvjs_gi @ jsapi_compiled_default_module.js:157
+gvjs_G @ jsapi_compiled_default_module.js:156
+gvjs_TE @ jsapi_compiled_ui_module.js:443
+gvjs_QJ @ jsapi_compiled_ui_module.js:864
+gvjs_nL @ jsapi_compiled_ui_module.js:1049
+(anonymous) @ jsapi_compiled_ui_module.js:1034
+(anonymous) @ jsapi_compiled_ui_module.js:702
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_.init @ jsapi_compiled_ui_module.js:703
+gvjs_.oQ @ jsapi_compiled_ui_module.js:1027
+gvjs_.us @ jsapi_compiled_ui_module.js:1027
+gvjs_.no @ jsapi_compiled_ui_module.js:1035
+gvjs_2B @ jsapi_compiled_ui_module.js:252
+gvjs_.rl @ jsapi_compiled_ui_module.js:259
+gvjs_.Rd @ jsapi_compiled_ui_module.js:1032
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+gvjs_.draw @ jsapi_compiled_ui_module.js:1029
+drawChart1 @ graphs.js:38
+reportStep2 @ API_reports.js:177
+(anonymous) @ API_reports.js:49
+app.js:118 <div class=​"col-12">​…​</div>​
+app.js:119 undefined
+API_reports.js:71 21821  API STEP 2: 48
+API_reports.js:75 #document (file:///C:/Users/mark/AvantLink/github/AvantLink_Merchant_Analytics_report/index.html)
+API_reports.js:174 {monthlyPerformanceSummary: Array(13)}
+graphs.js:4 building GRAPH 21821 (13) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]0: {Month: '2023-Feb', Ad_Impressions: 5956, Click_Throughs: 2194, Sales: 34182.94, Number_of_Sales: 137, …}1: {Month: '2023-Mar', Ad_Impressions: 6127, Click_Throughs: 3063, Sales: 21719.86, Number_of_Sales: 75, …}2: {Month: '2023-Apr', Ad_Impressions: 6179, Click_Throughs: 2746, Sales: 23113.33, Number_of_Sales: 78, …}3: {Month: '2023-May', Ad_Impressions: 4913, Click_Throughs: 2826, Sales: 23974.65, Number_of_Sales: 95, …}4: {Month: '2023-Jun', Ad_Impressions: 7208, Click_Throughs: 3090, Sales: 21130.39, Number_of_Sales: 83, …}5: {Month: '2023-Jul', Ad_Impressions: 9532, Click_Throughs: 4640, Sales: 27334.53, Number_of_Sales: 101, …}6: {Month: '2023-Aug', Ad_Impressions: 9408, Click_Throughs: 4132, Sales: 20069.12, Number_of_Sales: 80, …}7: {Month: '2023-Sep', Ad_Impressions: 8613, Click_Throughs: 5006, Sales: 19729.81, Number_of_Sales: 78, …}8: {Month: '2023-Oct', Ad_Impressions: 8187, Click_Throughs: 4660, Sales: 19837.1, Number_of_Sales: 77, …}9: {Month: '2023-Nov', Ad_Impressions: 6506, Click_Throughs: 6520, Sales: 37389.7, Number_of_Sales: 160, …}10: {Month: '2023-Dec', Ad_Impressions: 4926, Click_Throughs: 6447, Sales: 37837.11, Number_of_Sales: 144, …}11: {Month: '2024-Jan', Ad_Impressions: 2330, Click_Throughs: 6491, Sales: 40284.93, Number_of_Sales: 155, …}12: {Month: '2024-Feb', Ad_Impressions: 28, Click_Throughs: 173, Sales: 0, Number_of_Sales: 0, …}length: 13[[Prototype]]: Array(0)
+jsapi_compiled_default_module.js:157 [Violation] Added non-passive event listener to a scroll-blocking 'mousewheel' event. Consider marking event handler as 'passive' to make the page more responsive. See https://www.chromestatus.com/feature/5745543795965952
+gvjs_gi @ jsapi_compiled_default_module.js:157
+gvjs_G @ jsapi_compiled_default_module.js:156
+gvjs_TE @ jsapi_compiled_ui_module.js:443
+gvjs_QJ @ jsapi_compiled_ui_module.js:864
+gvjs_nL @ jsapi_compiled_ui_module.js:1049
+(anonymous) @ jsapi_compiled_ui_module.js:1034
+(anonymous) @ jsapi_compiled_ui_module.js:702
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+(anonymous) @ jsapi_compiled_default_module.js:110
+gvjs_.init @ jsapi_compiled_ui_module.js:703
+gvjs_.oQ @ jsapi_compiled_ui_module.js:1027
+gvjs_.us @ jsapi_compiled_ui_module.js:1027
+gvjs_.no @ jsapi_compiled_ui_module.js:1035
+gvjs_2B @ jsapi_compiled_ui_module.js:252
+gvjs_.rl @ jsapi_compiled_ui_module.js:259
+gvjs_.Rd @ jsapi_compiled_ui_module.js:1032
+(anonymous) @ jsapi_compiled_default_module.js:458
+gvjs_Zg @ jsapi_compiled_default_module.js:167
+gvjs_.draw @ jsapi_compiled_default_module.js:458
+gvjs_.draw @ jsapi_compiled_ui_module.js:1029
+drawChart1 @ graphs.js:38
+reportStep2 @ API_reports.js:177
+(anonymous) @ API_reports.js:49
+app.js:118 <div class=​"col-12">​…​</div>​
+app.js:119 undefined

@@ -71,6 +71,7 @@ function reportStep2(xml, report_id, month, merchant_id) {
 	console.log(merchant_id, " API STEP 2:", report_id);
 	switch (report_id) {
 		case 48:
+			var data = { monthlyPerformanceSummary: [] };
 			console.log(xmlDoc);
 			for (i = 0; i < 13; i++) {
 				let m = {};

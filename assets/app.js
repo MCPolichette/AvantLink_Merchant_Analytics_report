@@ -62,13 +62,16 @@ function runSelectedMerchants() {
 	today.month = new Date().getMonth();
 	today.day = new Date().getDay();
 	console.log(today);
+	var api_start_date = today.year - 1 + "-" + today.month + "-01";
+	var api_end_date = getLastDayOfPreviousMonth();
+	console.log(api_end_date, api_start_date);
+
 	for (i = 0; i < merchantList.length; i++) {
 		console.log(i);
 		runAPI({
 			report_id: 48,
-			startDate: today.year - 1 + "-" + today.month + "-01",
-			endDate: today.year + "-" + today.month + "-" + today.day,
-			month: "next",
+			startDate: api_start_date,
+			endDate: api_end_date,
 			merchant_id: merchantList[i],
 		});
 	}
@@ -76,11 +79,6 @@ function runSelectedMerchants() {
 	// API Call switch for FAILURE - Display - SUCCESS - run a graph, and some sort of algorithm to detect a month where drop off occured.
 }
 
-var data = {
-	monthlyPerformanceSummary: [],
-	notablePerformers: { one: [], two: [], three: [] },
-	newAffs: {},
-};
 function isNumber(value) {
 	return typeof value === "number" && isFinite(value);
 }
@@ -119,8 +117,8 @@ function hideRow(rowId, btnId) {
 		row.hidden = true;
 	}
 }
-function insertListing(col, classes) {
-	console.log(col);
+function insertListing(columns, classes) {
+	console.log(columns);
 	console.log(classes);
 	// Create a new <div> element with the class "row"
 	var row = document.createElement("div");
@@ -132,7 +130,10 @@ function insertListing(col, classes) {
 		default:
 			break;
 	}
-	row.appendChild(col);
+	for (i = 0; i < columns.length; i++) {
+		console.log(i);
+		row.appendChild(columns[i]);
+	}
 
 	// Get the element with the id "graph_display"
 	var graphDisplay = document.getElementById("graph_display");
@@ -154,6 +155,28 @@ function loadButton(id) {
 	btn.innerHTML = `<div class="spinner-border text-primary" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>`;
+}
+function getLastDayOfPreviousMonth() {
+	// Get the current date
+	const currentDate = new Date();
+	// Set the date to the first day of the current month
+	currentDate.setDate(1);
+	// Set the date to the previous day, which effectively sets it to the last day of the previous month
+	currentDate.setDate(0);
+
+	// Extract year, month, and date components
+	const year = currentDate.getFullYear();
+	// JavaScript months are zero-based, so we add 1 to get the previous month
+	const month = currentDate.getMonth() + 1;
+	const day = currentDate.getDate();
+
+	// Format the date as yyyy-mm-dd
+	const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day
+		.toString()
+		.padStart(2, "0")}`;
+
+	// Return the formatted date
+	return formattedDate;
 }
 function addNote() {
 	let noteTitle = document.getElementById("manualTitleText").value;
@@ -238,6 +261,35 @@ function createRow() {
 	// Append the new <div> element to the "graph_display" element
 	graphDisplay.appendChild(row);
 }
+
+function identifySignificantDrops(data) {
+	console.log("BUGS");
+	let significantDrops = [];
+	for (let i = 1; i < data.length; i++) {
+		const currentSales = data[i].Sales;
+		const previousSales = data[i - 1].Sales;
+
+		// Calculate the percentage change in sales
+		const percentageChange =
+			((currentSales - previousSales) / previousSales) * 100;
+
+		// Define a threshold for significant drops
+		const threshold = -70; // 70% drop
+
+		// If the percentage change is below the threshold, consider it a significant drop
+		if (percentageChange < threshold) {
+			significantDrops.push({
+				Month: data[i].Month,
+				Sales: data[i].Sales,
+				PreviousMonthSales: previousSales,
+				PercentageChange: percentageChange.toFixed(2) + "%",
+			});
+		}
+	}
+
+	return significantDrops;
+}
+
 // function perfomance_report() {
 // 	loadButton("submitBtn");
 // 	var acceptableData = true;
