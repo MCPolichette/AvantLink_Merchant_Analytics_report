@@ -22,7 +22,59 @@ function addMerchant() {
 		document.getElementById("selectedMerchantButton").disabled = false;
 	}
 }
-function runSelectedMerchants() {}
+function api_error(error, merchant_id) {
+	if (error.message.includes("Failed to fetch")) {
+		console.error(merchant_id, +" Failed to fetch data:", error);
+		var column = document.createElement("div");
+		column.classList.add("col-12");
+
+		// Create an <h5> element for the Merchant ID
+		var merchantIdHeader = document.createElement("h5");
+		merchantIdHeader.textContent = "Merchant ID: " + merchant_id;
+		column.appendChild(merchantIdHeader);
+
+		// Create an <h6> element for the error
+		var errorHeader = document.createElement("h6");
+		errorHeader.textContent = "Error: " + error;
+		column.appendChild(errorHeader);
+		console.log(column);
+		insertListing(column, "danger");
+	} else {
+		// Handle other types of errors example below
+		// console.error("An error occurred:", error);
+	}
+}
+function runSelectedMerchants() {
+	var merchantList = [];
+	var listItems = document.querySelectorAll("#merchantList li");
+	listItems.forEach(function (item) {
+		var merchantId = item.textContent.trim().replace("Remove", "");
+		merchantList.push(merchantId);
+	});
+	document
+		.querySelectorAll(".IdRemove")
+		.forEach((item) => item.classList.add("disabled"));
+	console.log(merchantList);
+	loadButton("selectedMerchantButton");
+	var acceptableData = true;
+	today.date = DateToString(new Date());
+	today.year = new Date().getFullYear();
+	today.month = new Date().getMonth();
+	today.day = new Date().getDay();
+	console.log(today);
+	for (i = 0; i < merchantList.length; i++) {
+		console.log(i);
+		runAPI({
+			report_id: 48,
+			startDate: today.year - 1 + "-" + today.month + "-01",
+			endDate: today.year + "-" + today.month + "-" + today.day,
+			month: "next",
+			merchant_id: merchantList[i],
+		});
+	}
+
+	// API Call switch for FAILURE - Display - SUCCESS - run a graph, and some sort of algorithm to detect a month where drop off occured.
+}
 
 var data = {
 	monthlyPerformanceSummary: [],
@@ -67,13 +119,35 @@ function hideRow(rowId, btnId) {
 		row.hidden = true;
 	}
 }
+function insertListing(col, classes) {
+	console.log(col);
+	console.log(classes);
+	// Create a new <div> element with the class "row"
+	var row = document.createElement("div");
+	row.classList.add("row");
+	switch (classes) {
+		case "danger":
+			row.classList.add("alert", "alert-danger");
+			break;
+		default:
+			break;
+	}
+	row.appendChild(col);
+
+	// Get the element with the id "graph_display"
+	var graphDisplay = document.getElementById("graph_display");
+
+	// Append the new <div> element to the "graph_display" element
+	graphDisplay.appendChild(row);
+	graphDisplay.appendChild(document.createElement("br"));
+}
 function removeDisabledButton(id) {
 	let btn = document.getElementById(id);
 	btn.disabled = false;
 	btn.classList = "btn btn-success";
 }
 function loadButton(id) {
-	document.getElementById("first_loading_bar").hidden = false;
+	// document.getElementById("first_loading_bar").hidden = false;
 	let btn = document.getElementById(id);
 	btn.disabled = true;
 	btn.classList = "btn btn-outline.primary";
@@ -153,6 +227,17 @@ function password_check() {
 	}
 }
 
+function createRow() {
+	// Create a new <div> element with the class "row"
+	var row = document.createElement("div");
+	row.classList.add("row");
+
+	// Get the element with the id "graph_display"
+	var graphDisplay = document.getElementById("graph_display");
+
+	// Append the new <div> element to the "graph_display" element
+	graphDisplay.appendChild(row);
+}
 // function perfomance_report() {
 // 	loadButton("submitBtn");
 // 	var acceptableData = true;
